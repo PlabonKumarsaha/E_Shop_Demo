@@ -32,7 +32,7 @@
 
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="120dp"
         android:background="#167ED1"
         android:textColor="#F1EAEA"
         android:text="Join now"
@@ -42,11 +42,15 @@
         android:id="@+id/mainLoginbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="20dp"
+
         android:layout_gravity="center"
         android:textSize="20sp"
         android:text="Already have an account?Login."
         android:background="#EE84A8"/>
+
+
+
 
 
 

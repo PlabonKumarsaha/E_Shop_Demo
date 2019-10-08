@@ -12,9 +12,9 @@
     <ImageView
         android:id="@+id/loginActivitylogo"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/logo"
 
         />
@@ -51,6 +51,64 @@
         android:text="Remember Me"
         android:gravity="center_vertical"
         android:textSize="25sp"
+        android:textColor="#F00A0A"
 />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/forgetPasswordLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#F9F7FC"
+            android:text="Forget Password?"
+            />
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/LoginActivityLogInbtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:text="Login"
+        android:background="#EE84A8"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+
+
+            android:id="@+id/adminPanelLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I am An admin"
+            android:textColor="#0D2FEE"
+            android:textSize="20sp"
+
+            />
+
+        <TextView
+             android:layout_marginLeft="30dp"
+            android:id="@+id/NotadminPanelLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I am not an admin"
+            android:textColor="#E01C0D"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
