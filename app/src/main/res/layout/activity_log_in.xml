@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogInActivity"
+    android:background="@drawable/login"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/loginActivitylogo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo"
+
+        />
+
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/phonenoEdittText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginActivitylogo"
+
+        android:hint="Enter User Name or phone no"
+        android:textColorHint="#F7F2F2"
+        android:textColor="#F7F2F2"
+        android:textSize="30sp"
+        tools:ignore="InvalidId" />
+
+    <EditText
+        android:layout_marginTop="30sp"
+        android:id="@+id/passEdittText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#F7F2F2"
+        android:textColor="#F7F2F2"
+        android:textSize="30sp"
+        tools:ignore="InvalidId" />
+    <com.rey.material.widget.CheckBox
+        android:id="@+id/remMechkbx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Material.Drawable.CheckBox"
+        android:text="Remember Me"
+        android:gravity="center_vertical"
+        android:textSize="25sp"
+/>
+
+</LinearLayout>
