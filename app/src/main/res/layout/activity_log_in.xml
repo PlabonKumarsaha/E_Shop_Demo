@@ -76,7 +76,7 @@
         android:layout_gravity="center"
         android:textSize="30sp"
         android:text="Login"
-        android:background="#EE84A8"/>
+        android:background="@drawable/button2"/>
 
     <LinearLayout
         android:layout_marginTop="20dp"

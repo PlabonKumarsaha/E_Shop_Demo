@@ -28,12 +28,12 @@
 
     <Button
         android:id="@+id/joinNowbtn"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
 
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
-        android:background="#167ED1"
+        android:background="@drawable/button2"
         android:textColor="#F1EAEA"
         android:text="Join now"
         android:textSize="20sp" />
@@ -45,9 +45,9 @@
         android:layout_marginTop="20dp"
 
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:text="Already have an account?Login."
-        android:background="#EE84A8"/>
+        android:background="@drawable/button"/>
 
 
 
