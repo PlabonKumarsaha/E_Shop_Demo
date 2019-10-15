@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(name))
         {
-            RegisterNameEdittText.setCursorVisible(true);
+            Toast.makeText(getApplicationContext(),"name field is empty",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(phoneNo))
         {
