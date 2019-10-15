@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/register"
+    android:orientation="vertical">
+
+
+
+    <ImageView
+        android:id="@+id/loginActivitylogo"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/logo"
+
+        />
+
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/RegisterNameEdittText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:hint="Enter Name"
+
+        android:textColorHint="#47D7E9"
+        android:textColor="#F7F2F2"
+        android:textSize="30sp"
+        tools:ignore="InvalidId" />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/RegisterphonenoEdittText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginActivitylogo"
+
+        android:hint="Enter phone no"
+        android:textColorHint="#47D7E9"
+        android:textColor="#F7F2F2"
+        android:textSize="30sp"
+        tools:ignore="InvalidId" />
+
+    <EditText
+        android:layout_marginTop="20sp"
+        android:id="@+id/RegisterpassEdittText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#47D7E9"
+        android:textColor="#F7F2F2"
+        android:textSize="30sp"
+        tools:ignore="InvalidId" />
+
+
+    <Button
+        android:layout_margin="20dp"
+        android:id="@+id/RegisterLogInbtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:text="Create Account"
+        android:background="@drawable/button2"/>
+
+
+
+</LinearLayout>
