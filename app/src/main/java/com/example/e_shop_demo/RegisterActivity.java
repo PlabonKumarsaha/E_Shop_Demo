@@ -2,17 +2,20 @@ package com.example.e_shop_demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    Button RegisterLogInbtn;
-    EditText RegisterpassEdittText,RegisterphonenoEdittText,RegisterNameEdittText;
+    private Button RegisterLogInbtn;
+    private EditText RegisterpassEdittText,RegisterphonenoEdittText,RegisterNameEdittText;
+    private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
         RegisterphonenoEdittText = findViewById(R.id.RegisterphonenoEdittText);
         RegisterNameEdittText = findViewById(R.id.RegisterNameEdittText);
         RegisterpassEdittText = findViewById(R.id.RegisterpassEdittText);
+        loadingBar = new ProgressDialog(this);
+
 
 
         RegisterLogInbtn.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +62,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
         else {
 
+            loadingBar.setTitle("Create Account");
+            loadingBar.setMessage("please wait!");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+            validatePhoneNo(name,phoneNo,password);
         }
+    }
+
+    private void validatePhoneNo(String name, String phoneNo, String password) {
     }
 }
