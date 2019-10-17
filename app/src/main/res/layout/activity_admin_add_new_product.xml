@@ -10,6 +10,68 @@
     <ImageView
         android:id="@+id/SelectProductImage"
         android:layout_width="350dp"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/select_product_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+   <EditText
+       android:layout_marginTop="10dp"
+       android:id="@+id/productName"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/SelectProductImage"
+       android:inputType="textMultiLine"
+       android:padding="20dp"
+       android:hint="Product Name"
+       android:layout_marginLeft="50dp"
+       android:layout_marginRight="50dp"
+       />
+
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/productDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productName"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:hint="Product Description"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        />
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/productPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productDescription"
+        android:inputType="textMultiLine"
+        android:padding="20dp"
+        android:hint="Product Price"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/newProductbtn"
+        android:text="Add Product"
+        android:textSize="18sp"
+        android:textColor="#F7F1F1"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/productPrice"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/button"
+        android:padding="17dp"
+        android:layout_marginRight="50dp"
+        />
 
 </RelativeLayout>

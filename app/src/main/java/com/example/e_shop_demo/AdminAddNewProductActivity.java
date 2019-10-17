@@ -3,11 +3,18 @@ package com.example.e_shop_demo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private  String categoryName;
+
+    ImageView SelectProductImage;
+    EditText productName,productDescription,productPrice;
+    Button newProductbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
         categoryName = getIntent().getExtras().get("category").toString();
 
-        Toast.makeText(getApplicationContext(),categoryName,Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(),categoryName,Toast.LENGTH_SHORT).show();
+        SelectProductImage = findViewById(R.id.SelectProductImage);
+        productName = findViewById(R.id.productName);
+        productDescription = findViewById(R.id.productDescription);
+        productPrice = findViewById(R.id.productPrice);
+        newProductbtn = findViewById(R.id.newProductbtn);
+
     }
 }
