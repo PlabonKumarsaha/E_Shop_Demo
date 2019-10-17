@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginActivitylogo"
 
-        android:hint="Enter User Name or phone no"
+        android:hint="Enter User phone no"
         android:textColorHint="#F7F2F2"
         android:textColor="#F7F2F2"
         android:textSize="30sp"
@@ -61,7 +61,7 @@
             android:id="@+id/forgetPasswordLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="#F9F7FC"
             android:text="Forget Password?"
             />
