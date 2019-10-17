@@ -69,7 +69,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                LoginActivityLogInbtn.setText("LogInAdmin");
+                LoginActivityLogInbtn.setText("Login Admin");
                 adminPanelLink.setVisibility(View.INVISIBLE);
                 NotadminPanelLink.setVisibility(View.VISIBLE);
 
