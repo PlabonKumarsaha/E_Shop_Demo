@@ -14,12 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.e_shop_demo.Model.User;
+import com.example.e_shop_demo.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rey.material.widget.CheckBox;
+
+import io.paperdb.Paper;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -42,7 +45,12 @@ public class LogInActivity extends AppCompatActivity {
         passEdittText = findViewById(R.id.passEdittText);
         LoginActivityLogInbtn = findViewById(R.id.LoginActivityLogInbtn);
 
+        remMechkbx = findViewById(R.id.remMechkbx);
+        Paper.init(this);
+
+
         loadingBar = new ProgressDialog(this);
+
 
         LoginActivityLogInbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +91,16 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void allowAcessToAccount(final String phoneNo, final String password) {
+
+        if(remMechkbx.isChecked())
+        {
+            //Prevalant is a class with two member variable - (userPhoneKey,userPasswordKey)
+
+            //if remmber me check box is checked then the user will not have to go through the log in
+            Paper.book().write(Prevalent.userPhoneKey,phoneNo);
+            Paper.book().write(Prevalent.userPasswordKey,password);
+
+        }
 
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();

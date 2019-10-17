@@ -7,5 +7,10 @@ public class Prevalent {
 
     private static User currentOnLineUser;
 
+    //variables must be accesed from anywhere
+
+    public   static  final String userPhoneKey = "UserPhone";
+    public   static  final String userPasswordKey = "UserPassword";
+
 
 }
