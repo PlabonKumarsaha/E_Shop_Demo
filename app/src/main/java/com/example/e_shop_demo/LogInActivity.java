@@ -30,7 +30,8 @@ public class LogInActivity extends AppCompatActivity {
 
     EditText phonenoEdittText,passEdittText;
     CheckBox remMechkbx;
-    TextView forgetPasswordLink,adminPanelLink,NotadminPanelLink;
+    TextView forgetPasswordLink;
+    TextView adminPanelLink,NotadminPanelLink;
     Button LoginActivityLogInbtn;
     private String parentDBName = "User";
 
@@ -44,6 +45,9 @@ public class LogInActivity extends AppCompatActivity {
         phonenoEdittText = findViewById(R.id.phonenoEdittText);
         passEdittText = findViewById(R.id.passEdittText);
         LoginActivityLogInbtn = findViewById(R.id.LoginActivityLogInbtn);
+        NotadminPanelLink = findViewById(R.id.NotadminPanelLink);
+
+        adminPanelLink = findViewById(R.id.adminPanelLink);
 
         remMechkbx = findViewById(R.id.remMechkbx);
         Paper.init(this);
@@ -60,6 +64,39 @@ public class LogInActivity extends AppCompatActivity {
 
             }
         });
+
+        adminPanelLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LoginActivityLogInbtn.setText("LogInAdmin");
+                adminPanelLink.setVisibility(View.INVISIBLE);
+                NotadminPanelLink.setVisibility(View.VISIBLE);
+
+                //this database is created for the admin
+                parentDBName = "Admins";
+
+
+            }
+        });
+
+        NotadminPanelLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //
+
+                LoginActivityLogInbtn.setText("Login");
+                adminPanelLink.setVisibility(View.VISIBLE);
+                NotadminPanelLink.setVisibility(View.INVISIBLE);
+
+                //this dataBase is created for the user
+                parentDBName = "User";
+
+            }
+        });
+
+
     }
 
     private void logInUser() {
@@ -112,14 +149,30 @@ public class LogInActivity extends AppCompatActivity {
                 {
 
                     User userDate = dataSnapshot.child(parentDBName).child(phoneNo).getValue(User.class);
+
                     if(userDate.getPhoneNo().equals(phoneNo))
                     {
+                        //checks if the user is an admin or regular user!
                         if (userDate.getPassword().equals(password))
                         {
-                            Toast.makeText(getApplicationContext(),"Log in Sucessful",Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
-                            Intent intent = new Intent(LogInActivity.this,HomeActivity.class);
-                            startActivity(intent);
+                            //checks which database has to be entered..is it the admin or the regular user!
+
+                            if(parentDBName.equals("Admins"))
+                            {
+
+                                Toast.makeText(getApplicationContext(),"Welcome Admin! Log in Sucessful",Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent intent = new Intent(LogInActivity.this,AdminAddNewProductActivity.class);
+                                startActivity(intent);
+
+                            }
+                            else if(parentDBName.equals("User"))
+                            {
+                                Toast.makeText(getApplicationContext(),"Log in Sucessful",Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent intent = new Intent(LogInActivity.this,HomeActivity.class);
+                                startActivity(intent);
+                            }
 
                         }
                         else {
