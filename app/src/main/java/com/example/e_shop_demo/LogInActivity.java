@@ -104,6 +104,12 @@ public class LogInActivity extends AppCompatActivity {
                             startActivity(intent);
 
                         }
+                        else {
+                            loadingBar.dismiss();
+                            Toast.makeText(getApplicationContext(),"wrong Password",Toast.LENGTH_SHORT).show();
+
+
+                        }
                     }
 
                 }
