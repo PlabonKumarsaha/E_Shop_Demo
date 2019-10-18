@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -35,7 +37,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private String productRandomKey;
     //private DatabaseReference productImagesRef;
-    private DatabaseReference ProductImagesRef;
+    private StorageReference ProductImagesRef;
 
     private String categoryName,Description,price,prodName;
 
@@ -47,7 +49,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),"Welcome Admin",Toast.LENGTH_SHORT).show();
 
         categoryName = getIntent().getExtras().get("category").toString();
-        ProductImagesRef = FirebaseDatabase.getInstance().getReference().child("Product images");
+        //ProductImagesRef = FirebaseDatabase.getInstance().getReference().child("Product images");
+        ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product images");
 
        // Toast.makeText(getApplicationContext(),categoryName,Toast.LENGTH_SHORT).show();
         SelectProductImage = findViewById(R.id.SelectProductImage);
@@ -148,6 +151,13 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+
+                String message = e.toString();
+                Toast.makeText(getApplicationContext(),"error :"+e ,Toast.LENGTH_SHORT).show();
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
             }
         });
