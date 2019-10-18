@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".NavHeaderHomeActivity"></activity>
+        <activity android:name=".AppBarHomeActivity" />
+        <activity android:name=".ContentHome" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".AdminCategoryActivity" />
         <activity android:name=".AdminAddNewProductActivity" />
         <activity android:name=".RegisterActivity" />
