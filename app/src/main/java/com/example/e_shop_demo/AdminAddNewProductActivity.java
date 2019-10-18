@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,6 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
@@ -40,6 +45,11 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private StorageReference ProductImagesRef;
 
     private String categoryName,Description,price,prodName;
+    private String downloadImageUrl;
+
+    private DatabaseReference productRef;
+
+    private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,10 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         productDescription = findViewById(R.id.productDescription);
         productPrice = findViewById(R.id.productPrice);
         newProductbtn = findViewById(R.id.newProductbtn);
+        productRef = FirebaseDatabase.getInstance().getReference().child("Products");
+
+        loadingBar = new ProgressDialog(this);
+
 
         SelectProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +122,16 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         }
         else {
             storeproductInformation();
+
         }
     }
 
     private void storeproductInformation() {
+
+        loadingBar.setTitle("Adding New product");
+        loadingBar.setMessage("please wait!");
+        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar.show();
 
         Calendar calendar = Calendar.getInstance();
 
@@ -144,8 +164,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
        // StorageReference filepath = mstorageRef.child("folder").child(filename);
 
         //Uri File= Uri.fromFile(new File(mFileName));
+        //addding file name as a unique value
 
-         StorageReference filePath = ProductImagesRef.child(imageURI.getLastPathSegment()+ productRandomKey + ".jpg");
+         final StorageReference filePath = ProductImagesRef.child(imageURI.getLastPathSegment()+ productRandomKey + ".jpg");
 
         final UploadTask uploadTask = filePath.putFile(imageURI);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -154,14 +175,90 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
                 String message = e.toString();
                 Toast.makeText(getApplicationContext(),"error :"+e ,Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                Toast.makeText(getApplicationContext(),"product Image upload sucessful" ,Toast.LENGTH_SHORT).show();
+
+
+                Task<Uri>urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+
+                        if(!task.isSuccessful())
+                        {
+                            throw task.getException();
+
+                        }
+
+                        downloadImageUrl = filePath.getDownloadUrl().toString();
+                        return filePath.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+
+                        if(task.isSuccessful())
+                        {
+
+                            downloadImageUrl = task.getResult().toString();
+                            Toast.makeText(getApplicationContext()," got the product image" ,Toast.LENGTH_SHORT).show();
+
+                            saveProductinfoToDatabase();
+                        }
+
+                    }
+                });
             }
         });
 
+
+
+    }
+
+    private void saveProductinfoToDatabase() {
+
+
+        //savig all the data in the hash map
+        HashMap<String,Object> productMap = new HashMap<>();
+        productMap.put("pid",productRandomKey);
+        productMap.put("date",saveCurrentDate);
+        productMap.put("time",saveCurrentTime);
+        productMap.put("description",Description);
+        productMap.put("image",downloadImageUrl);
+        productMap.put("category",categoryName);
+        productMap.put("price",price);
+        productMap.put("pname",prodName);
+
+        //save the data in firebase
+
+        productRef.child(productRandomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful())
+                {
+                    loadingBar.dismiss();
+
+                    //after sucessful adding a product the admin will be taken back to the admin category activity where he can
+                    //store other datas!
+                    Intent intent = new Intent(AdminAddNewProductActivity.this,AdminCategoryActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext()," product details added sucessfully!" ,Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    loadingBar.dismiss();
+
+                    //task.getException()
+                    Toast.makeText(getApplicationContext()," Error :"+task.getException().toString() ,Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
 
 
     }
