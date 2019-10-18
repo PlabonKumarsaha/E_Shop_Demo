@@ -276,7 +276,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == galleryPic && requestCode == RESULT_OK && data != null)
+        if(requestCode == galleryPic && resultCode == RESULT_OK && data != null)
         {
 
             imageURI = data.getData();
