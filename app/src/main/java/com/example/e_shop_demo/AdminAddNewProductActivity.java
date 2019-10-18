@@ -1,5 +1,6 @@
 package com.example.e_shop_demo;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +34,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
     private String saveCurrentDate,saveCurrentTime;
 
     private String productRandomKey;
+    //private DatabaseReference productImagesRef;
+    private DatabaseReference ProductImagesRef;
 
     private String categoryName,Description,price,prodName;
 
@@ -38,6 +47,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),"Welcome Admin",Toast.LENGTH_SHORT).show();
 
         categoryName = getIntent().getExtras().get("category").toString();
+        ProductImagesRef = FirebaseDatabase.getInstance().getReference().child("Product images");
 
        // Toast.makeText(getApplicationContext(),categoryName,Toast.LENGTH_SHORT).show();
         SelectProductImage = findViewById(R.id.SelectProductImage);
@@ -115,7 +125,33 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
         saveCurrentTime = currentTime.format(calendar.getTime());
 
+        //creating a random usnique key from the date and time
         productRandomKey = saveCurrentDate+saveCurrentTime;
+
+        //imageURI.getLastPathSegment() gets the image name .This is a string type value so we concatinate this with product key
+
+        //DatabaseReference filepath = productImagesRef.child(imageURI.getLastPathSegment()+ productRandomKey + ".jpg");
+       // DatabaseReference fileath = productImagesRef.child(imageURI.getLastPathSegment()+productRandomKey+".jpg");
+
+       // StorageReference filePath = P;
+       // final UploadTask uploadTask = filePath.putFile(imageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+
+            // final UploadTask uploadTask = filepath.push()
+
+       // StorageReference filepath = mstorageRef.child("folder").child(filename);
+
+        //Uri File= Uri.fromFile(new File(mFileName));
+
+         StorageReference filePath = ProductImagesRef.child(imageURI.getLastPathSegment()+ productRandomKey + ".jpg");
+
+        final UploadTask uploadTask = filePath.putFile(imageURI);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
 
 
     }
